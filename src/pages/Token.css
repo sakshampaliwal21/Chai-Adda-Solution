@@ -1,0 +1,315 @@
+.token-page {
+    padding: 6rem 0 3rem;
+    min-height: 100vh;
+}
+
+.token-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.token-empty {
+    text-align: center;
+    padding: 5rem 2rem;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.token-empty h2 {
+    margin-bottom: 0.5rem;
+}
+
+.token-empty p {
+    color: var(--clr-text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Token Card */
+.token-card {
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.token-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(232, 101, 43, 0.08), transparent 50%);
+    animation: float 6s ease-in-out infinite;
+}
+
+.token-badge {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    background: rgba(232, 101, 43, 0.15);
+    border: 1px solid rgba(232, 101, 43, 0.3);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--clr-primary-light);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.token-party-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.2), rgba(232, 101, 43, 0.2));
+    border: 1px solid rgba(245, 166, 35, 0.4);
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--clr-accent);
+    margin-bottom: 1rem;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+.token-schedule-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    position: relative;
+    padding: 1rem;
+    background: rgba(245, 166, 35, 0.06);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(245, 166, 35, 0.15);
+}
+
+.token-schedule-info .time-value {
+    font-size: 1.1rem;
+}
+
+.schedule-time {
+    font-weight: 700;
+}
+
+.schedule-slot {
+    color: var(--clr-primary-light);
+}
+
+.schedule-contact {
+    font-size: 0.8rem;
+    color: var(--clr-text-muted);
+    margin-top: 0.25rem;
+}
+
+.token-number {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.token-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    position: relative;
+}
+
+.time-label {
+    font-size: 0.8rem;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.time-value {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--clr-accent);
+}
+
+/* Timeline */
+.timeline-card {
+    padding: 2rem;
+}
+
+.timeline-card h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.timeline-step {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+.timeline-step:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.timeline-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background: var(--clr-bg-card);
+    border: 2px solid var(--clr-border);
+    transition: all var(--transition-base);
+}
+
+.timeline-step.active .timeline-dot {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 15px rgba(232, 101, 43, 0.3);
+}
+
+.timeline-step.current .timeline-dot {
+    animation: pulse 2s infinite;
+}
+
+.timeline-line {
+    width: 2px;
+    flex: 1;
+    min-height: 20px;
+    background: var(--clr-border);
+    margin: 4px 0;
+    transition: background var(--transition-base);
+}
+
+.timeline-line.active {
+    background: var(--clr-primary);
+}
+
+.timeline-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+    margin-top: 0.4rem;
+}
+
+.timeline-info p {
+    font-size: 0.8rem;
+    color: var(--clr-text-muted);
+}
+
+.timeline-step.active .timeline-info h4 {
+    color: var(--clr-text);
+}
+
+.timeline-step:not(.active) .timeline-info h4 {
+    color: var(--clr-text-muted);
+}
+
+/* Order Details */
+.order-details-card {
+    padding: 2rem;
+}
+
+.order-details-card h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.order-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.order-item-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.order-item-row:last-child {
+    border-bottom: none;
+}
+
+.order-item-emoji {
+    font-size: 1.3rem;
+}
+
+.order-item-name {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.order-item-qty {
+    color: var(--clr-text-muted);
+    font-size: 0.85rem;
+}
+
+.order-item-price {
+    font-weight: 600;
+    color: var(--clr-primary-light);
+    min-width: 60px;
+    text-align: right;
+}
+
+.order-total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 0.5rem;
+    border-top: 2px solid var(--clr-border-strong);
+    margin-top: 0.5rem;
+    font-weight: 700;
+}
+
+.order-total-value {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--clr-primary-light);
+}
+
+.order-meta {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--clr-text-muted);
+    margin-top: 0.5rem;
+}
+
+/* Actions */
+.token-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
