@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
+import StudentDashboard from './StudentDashboard';
 import './Profile.css';
 
 export default function Profile() {
@@ -82,6 +83,12 @@ export default function Profile() {
                         onClick={() => setActiveTab('recommended')}
                     >
                         <span>✨ Recommended</span>
+                    </button>
+                    <button
+                        className={`profile-tab cursor-target ${activeTab === 'dashboard' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('dashboard')}
+                    >
+                        <span>📊 Dashboard</span>
                     </button>
                 </motion.div>
 
@@ -232,6 +239,20 @@ export default function Profile() {
                                     ))}
                                 </div>
                             )}
+                        </motion.div>
+                    )}
+
+                    {activeTab === 'dashboard' && (
+                        <motion.div
+                            key="dashboard"
+                            className="profile-content"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 20 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <h2>Your Analytics</h2>
+                            <StudentDashboard />
                         </motion.div>
                     )}
                 </AnimatePresence>

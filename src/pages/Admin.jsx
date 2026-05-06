@@ -4,6 +4,7 @@ import { useOrders } from '../context/OrderContext';
 import { useToast } from '../context/ToastContext';
 import { useStock } from '../context/StockContext';
 import StockManagement from './StockManagement';
+import AdminDashboard from './AdminDashboard';
 import './Admin.css';
 
 const statusConfig = {
@@ -147,6 +148,13 @@ export default function Admin() {
                         {outOfStockItems.length > 0 && (
                             <span className="admin-tab-badge danger">{outOfStockItems.length}</span>
                         )}
+                    </button>
+                    <button
+                        className={`admin-tab cursor-target ${activeTab === 'dashboard' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('dashboard')}
+                    >
+                        <span className="admin-tab-icon">📊</span>
+                        <span>Dashboard</span>
                     </button>
                 </motion.div>
 
@@ -301,7 +309,7 @@ export default function Admin() {
                                 )}
                             </div>
                         </motion.div>
-                    ) : (
+                    ) : activeTab === 'stock' ? (
                         <motion.div
                             key="stock"
                             initial={{ opacity: 0, x: 20 }}
@@ -310,6 +318,16 @@ export default function Admin() {
                             transition={{ duration: 0.25 }}
                         >
                             <StockManagement />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="dashboard"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.25 }}
+                        >
+                            <AdminDashboard />
                         </motion.div>
                     )}
                 </AnimatePresence>

@@ -1,0 +1,426 @@
+/* ===== Student Dashboard Styles ===== */
+
+.student-dashboard {
+    margin-top: 0.5rem;
+}
+
+/* ===== Stat Cards Row ===== */
+.student-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.student-stat-card {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.student-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+}
+
+.student-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+}
+
+.student-stat-icon-wrap {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.stat-orders { background: rgba(232, 101, 43, 0.15); }
+.stat-spent { background: rgba(245, 166, 35, 0.15); }
+.stat-fav { background: rgba(52, 211, 153, 0.15); }
+.stat-member { background: rgba(96, 165, 250, 0.15); }
+
+.student-stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.student-stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--clr-text), var(--clr-primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.student-stat-value-text {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--clr-text);
+}
+
+.student-stat-label {
+    font-size: 0.72rem;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* ===== Section Containers ===== */
+.student-section {
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.student-section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.student-section-sub {
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+    margin-bottom: 1.75rem;
+}
+
+/* ===== Monthly Breakdown ===== */
+.student-monthly-grid {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.student-monthly-card {
+    flex: 1;
+    background: rgba(13, 11, 10, 0.4);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    transition: all var(--transition-base);
+}
+
+.student-monthly-card:hover {
+    border-color: var(--clr-border-strong);
+}
+
+.student-monthly-card.dim {
+    opacity: 0.65;
+}
+
+.student-monthly-card.dim:hover {
+    opacity: 0.85;
+}
+
+.student-monthly-header {
+    margin-bottom: 1rem;
+}
+
+.student-monthly-period {
+    font-size: 0.78rem;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+.student-monthly-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.student-monthly-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.student-monthly-num {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.student-monthly-lbl {
+    font-size: 0.72rem;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+}
+
+.student-monthly-vs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.vs-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--clr-bg-card);
+    border: 2px solid var(--clr-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--clr-text-muted);
+}
+
+.vs-changes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.vs-badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.vs-badge.positive {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--clr-success);
+}
+
+.vs-badge.negative {
+    background: rgba(248, 113, 113, 0.15);
+    color: var(--clr-error);
+}
+
+/* ===== Spend Chart ===== */
+.student-chart {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    height: 240px;
+    padding: 0 0.5rem;
+}
+
+.student-chart-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    height: 100%;
+}
+
+.student-chart-value {
+    font-size: 0.72rem;
+    color: var(--clr-primary-light);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.student-chart-bar-track {
+    flex: 1;
+    width: 100%;
+    max-width: 56px;
+    display: flex;
+    align-items: flex-end;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.student-chart-bar {
+    width: 100%;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: linear-gradient(180deg, var(--clr-primary), var(--clr-primary-dark));
+    transition: height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    min-height: 4px;
+    position: relative;
+}
+
+.student-chart-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
+    border-radius: inherit;
+}
+
+.student-chart-col:hover .student-chart-bar {
+    background: linear-gradient(180deg, var(--clr-primary-light), var(--clr-primary));
+    box-shadow: 0 0 15px rgba(232, 101, 43, 0.35);
+}
+
+.student-chart-label {
+    font-size: 0.78rem;
+    color: var(--clr-text-secondary);
+    font-weight: 600;
+}
+
+.student-chart-orders {
+    font-size: 0.65rem;
+    color: var(--clr-text-muted);
+}
+
+/* ===== Transactions ===== */
+.student-transactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.student-txn-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(13, 11, 10, 0.35);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+}
+
+.student-txn-card:hover {
+    border-color: rgba(232, 101, 43, 0.25);
+    background: rgba(13, 11, 10, 0.5);
+}
+
+.student-txn-left {
+    min-width: 110px;
+}
+
+.student-txn-token {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--clr-primary-light);
+    margin-bottom: 0.15rem;
+}
+
+.student-txn-date {
+    font-size: 0.75rem;
+    color: var(--clr-text-secondary);
+    display: flex;
+    flex-direction: column;
+}
+
+.student-txn-time {
+    font-size: 0.68rem;
+    color: var(--clr-text-muted);
+}
+
+.student-txn-items {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.student-txn-item {
+    font-size: 0.78rem;
+    background: var(--clr-bg-card);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--clr-border);
+    white-space: nowrap;
+}
+
+.student-txn-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.2rem;
+    min-width: 80px;
+}
+
+.student-txn-total {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--clr-primary-light);
+}
+
+.student-txn-method {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+}
+
+.student-txn-method.upi {
+    background: rgba(96, 165, 250, 0.12);
+    color: var(--clr-info);
+}
+
+.student-txn-method.cash {
+    background: rgba(52, 211, 153, 0.12);
+    color: var(--clr-success);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .student-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .student-monthly-grid {
+        flex-direction: column;
+    }
+
+    .student-monthly-vs {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 768px) {
+    .student-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .student-section {
+        padding: 1.25rem;
+    }
+
+    .student-chart {
+        height: 180px;
+        gap: 0.5rem;
+    }
+
+    .student-txn-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .student-txn-right {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .student-stat-value {
+        font-size: 1.35rem;
+    }
+}
