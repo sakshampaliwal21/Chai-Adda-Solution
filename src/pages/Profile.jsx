@@ -185,7 +185,7 @@ export default function Profile() {
                                                         className="btn btn-primary mt-3 cursor-target w-full"
                                                         onClick={() => handleReorder(fav.items)}
                                                     >
-                                                        ⚡ 1-Tap Reorder
+                                                        Reorder
                                                     </button>
                                                 </div>
                                             ))}

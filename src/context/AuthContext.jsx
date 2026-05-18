@@ -22,9 +22,45 @@ function loadUsers() {
     return [];
 }
 
+const DEFAULT_FAVORITES = [
+    {
+        id: 'dummy_fav_1',
+        name: 'My Usual: 2 Chai + Momos',
+        items: [
+            { id: 'b1', name: 'Masala Tea', price: 20, emoji: '🍵', quantity: 2 },
+            { id: 'f2', name: 'Paneer Momo', price: 99, emoji: '🥟', quantity: 1 }
+        ]
+    },
+    {
+        id: 'dummy_fav_2',
+        name: 'Study Session Fuel',
+        items: [
+            { id: 'b2', name: 'Cold Coffee', price: 60, emoji: '🧋', quantity: 1 },
+            { id: 's3', name: 'Peri Peri Fries', price: 90, emoji: '🍟', quantity: 1 }
+        ]
+    },
+    {
+        id: 'dummy_fav_3',
+        name: 'Quick Breakfast',
+        items: [
+            { id: 'b1', name: 'Masala Tea', price: 20, emoji: '🍵', quantity: 1 },
+            { id: 'm1', name: 'Cheese Maggi', price: 50, emoji: '🧀', quantity: 1 }
+        ]
+    }
+];
+
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(loadUser);
     const [users, setUsers] = useState(loadUsers);
+
+    // Update current user if they only have the old single dummy combo
+    useEffect(() => {
+        if (user && user.favorites && user.favorites.length === 1 && user.favorites[0].name.includes('Usual')) {
+            const updatedUser = { ...user, favorites: DEFAULT_FAVORITES };
+            setUser(updatedUser);
+            setUsers(prev => prev.map(u => u.id === user.id ? updatedUser : u));
+        }
+    }, []);
 
     // Persist user session
     useEffect(() => {
@@ -82,16 +118,7 @@ export function AuthProvider({ children }) {
             provider: 'email',
             avatar: name.trim().charAt(0).toUpperCase(),
             createdAt: new Date().toISOString(),
-            favorites: [
-                {
-                    id: `fav_${Date.now()}`,
-                    name: 'My Usual: 2 Chai + Momos',
-                    items: [
-                        { id: 'b1', name: 'Masala Tea', price: 20, emoji: '🍵', quantity: 2 },
-                        { id: 'f2', name: 'Paneer Momo', price: 99, emoji: '🥟', quantity: 1 }
-                    ]
-                }
-            ],
+            favorites: DEFAULT_FAVORITES,
             favoriteItems: [],
             orderHistory: []
         };
@@ -109,18 +136,14 @@ export function AuthProvider({ children }) {
             return { success: false, error: 'Invalid email or password' };
         }
 
+        let existingFavs = found.favorites;
+        if (!existingFavs || existingFavs.length === 0 || (existingFavs.length === 1 && existingFavs[0].name.includes('Usual'))) {
+            existingFavs = DEFAULT_FAVORITES;
+        }
+
         setUser({ 
             ...found, 
-            favorites: found.favorites || [
-                {
-                    id: 'dummy_fav_1',
-                    name: 'My Usual: 2 Chai + Momos',
-                    items: [
-                        { id: 'b1', name: 'Masala Tea', price: 20, emoji: '🍵', quantity: 2 },
-                        { id: 'f2', name: 'Paneer Momo', price: 99, emoji: '🥟', quantity: 1 }
-                    ]
-                }
-            ], 
+            favorites: existingFavs, 
             favoriteItems: found.favoriteItems || [],
             orderHistory: found.orderHistory || [] 
         });
@@ -135,16 +158,7 @@ export function AuthProvider({ children }) {
             email: googleUser.email,
             provider: 'google',
             avatar: googleUser.name.charAt(0).toUpperCase(),
-            favorites: [
-                {
-                    id: `fav_${Date.now()}`,
-                    name: 'My Usual: 2 Chai + Momos',
-                    items: [
-                        { id: 'b1', name: 'Masala Tea', price: 20, emoji: '🍵', quantity: 2 },
-                        { id: 'f2', name: 'Paneer Momo', price: 99, emoji: '🥟', quantity: 1 }
-                    ]
-                }
-            ],
+            favorites: DEFAULT_FAVORITES,
             favoriteItems: [],
             orderHistory: []
         };
@@ -158,7 +172,14 @@ export function AuthProvider({ children }) {
 
         setUser((prevUser) => {
             const existing = users.find((u) => u.email === newUser.email);
-            return existing ? { ...existing, favorites: existing.favorites || [], favoriteItems: existing.favoriteItems || [], orderHistory: existing.orderHistory || [] } : newUser;
+            if (existing) {
+                let existingFavs = existing.favorites;
+                if (!existingFavs || existingFavs.length === 0 || (existingFavs.length === 1 && existingFavs[0].name.includes('Usual'))) {
+                    existingFavs = DEFAULT_FAVORITES;
+                }
+                return { ...existing, favorites: existingFavs, favoriteItems: existing.favoriteItems || [], orderHistory: existing.orderHistory || [] };
+            }
+            return newUser;
         });
         return { success: true };
     }, []);

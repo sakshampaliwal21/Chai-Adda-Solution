@@ -9,7 +9,7 @@ const MENU_ITEMS = [
     { id: 'b5', name: 'Black Coffee', emoji: '☕', price: 40 },
     { id: 'f1', name: 'Samosa', emoji: '🥟', price: 15 },
     { id: 'f2', name: 'Paneer Momo', emoji: '🥟', price: 99 },
-    { id: 'f3', name: 'Veg Maggi', emoji: '🍜', price: 50 },
+    { id: 'f3', name: 'Veg Maggi', emoji: '🧀', price: 50 },
     { id: 'f4', name: 'Bun Maska', emoji: '🍞', price: 30 },
     { id: 'f5', name: 'Spring Roll', emoji: '🥟', price: 80 },
     { id: 'f6', name: 'Paneer Sandwich', emoji: '🥪', price: 70 },
@@ -220,7 +220,7 @@ export function getComparativeData() {
         { name: 'Cutting Chai', emoji: '☕', sold: Math.round(thisOrders * 1.2), revenue: Math.round(thisOrders * 1.2 * 10) },
         { name: 'Samosa', emoji: '🥟', sold: Math.round(thisOrders * 0.9), revenue: Math.round(thisOrders * 0.9 * 15) },
         { name: 'Paneer Momo', emoji: '🥟', sold: Math.round(thisOrders * 0.6), revenue: Math.round(thisOrders * 0.6 * 99) },
-        { name: 'Veg Maggi', emoji: '🍜', sold: Math.round(thisOrders * 0.5), revenue: Math.round(thisOrders * 0.5 * 50) },
+        { name: 'Veg Maggi', emoji: '🧀', sold: Math.round(thisOrders * 0.5), revenue: Math.round(thisOrders * 0.5 * 50) },
     ];
 
     return {

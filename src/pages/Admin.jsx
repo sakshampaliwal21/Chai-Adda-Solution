@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useOrders } from '../context/OrderContext';
 import { useToast } from '../context/ToastContext';
 import { useStock } from '../context/StockContext';
+import BorderGlow from '../components/BorderGlow';
 import StockManagement from './StockManagement';
 import AdminDashboard from './AdminDashboard';
 import './Admin.css';
@@ -22,6 +23,58 @@ export default function Admin() {
     const [loginError, setLoginError] = useState('');
     const [filter, setFilter] = useState('all');
     const [activeTab, setActiveTab] = useState('orders');
+
+    // 3D tilt refs (same as Auth page)
+    const cardRef = useRef(null);
+    const shineRef = useRef(null);
+    const tiltRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0, shineX: 50, shineY: 50 });
+    const rafRef = useRef(null);
+
+    // Smooth 60fps tilt animation loop
+    const animateTilt = useCallback(() => {
+        const t = tiltRef.current;
+        const lerp = 0.08;
+        t.x += (t.targetX - t.x) * lerp;
+        t.y += (t.targetY - t.y) * lerp;
+
+        if (cardRef.current) {
+            cardRef.current.style.transform =
+                `perspective(1000px) rotateX(${t.y}deg) rotateY(${t.x}deg) scale3d(1.01, 1.01, 1.01)`;
+        }
+        if (shineRef.current) {
+            shineRef.current.style.background =
+                `radial-gradient(circle at ${t.shineX}% ${t.shineY}%, rgba(232,101,43,0.18), transparent 60%)`;
+        }
+
+        rafRef.current = requestAnimationFrame(animateTilt);
+    }, []);
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            rafRef.current = requestAnimationFrame(animateTilt);
+            return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+        }
+    }, [animateTilt, isAuthenticated]);
+
+    const handleCardMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const x = (e.clientX - centerX) / (rect.width / 2);
+        const y = (e.clientY - centerY) / (rect.height / 2);
+        tiltRef.current.targetX = x * 3;
+        tiltRef.current.targetY = y * -3;
+        tiltRef.current.shineX = ((e.clientX - rect.left) / rect.width) * 100;
+        tiltRef.current.shineY = ((e.clientY - rect.top) / rect.height) * 100;
+    };
+
+    const handleCardMouseLeave = () => {
+        tiltRef.current.targetX = 0;
+        tiltRef.current.targetY = 0;
+        tiltRef.current.shineX = 50;
+        tiltRef.current.shineY = 50;
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -62,39 +115,86 @@ export default function Admin() {
     if (!isAuthenticated) {
         return (
             <div className="admin-page page-enter">
-                <div className="container">
+                {/* Floating Particles */}
+                <div className="auth-particles">
+                    {[...Array(20)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="auth-particle"
+                            style={{
+                                '--delay': `${Math.random() * 5}s`,
+                                '--duration': `${8 + Math.random() * 12}s`,
+                                '--x-start': `${Math.random() * 100}%`,
+                                '--y-start': `${Math.random() * 100}%`,
+                                '--size': `${3 + Math.random() * 6}px`,
+                                '--opacity': `${0.1 + Math.random() * 0.3}`,
+                            }}
+                        />
+                    ))}
+                </div>
+
+                {/* Glowing Orbs */}
+                <div className="auth-orb auth-orb-1" />
+                <div className="auth-orb auth-orb-2" />
+                <div className="auth-orb auth-orb-3" />
+
+                <div
+                    className="container admin-login-container"
+                    onMouseMove={handleCardMouseMove}
+                    onMouseLeave={handleCardMouseLeave}
+                >
                     <motion.div
-                        className="admin-login glass-strong"
-                        initial={{ opacity: 0, scale: 0.95 }}
+                        className="auth-card-3d admin-login"
+                        ref={cardRef}
+                        initial={{ opacity: 0, scale: 0.85 }}
                         animate={{ opacity: 1, scale: 1 }}
+                        transition={{ type: 'spring', stiffness: 100, damping: 20, duration: 0.8 }}
                     >
-                        <div className="login-icon">🔐</div>
-                        <h1>Admin Access</h1>
-                        <p>Enter password to manage orders</p>
-                        <form onSubmit={handleLogin} className="login-form">
-                            <div className="input-group">
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter admin password"
-                                    className="admin-input"
-                                    autoFocus
-                                />
-                            </div>
-                            {loginError && (
-                                <motion.p
-                                    className="login-error"
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                >
-                                    {loginError}
-                                </motion.p>
-                            )}
-                            <button type="submit" className="btn btn-primary btn-lg login-btn cursor-target">
-                                Login →
-                            </button>
-                        </form>
+                        {/* Card Shine Effect */}
+                        <div className="card-shine" ref={shineRef} />
+
+                        <BorderGlow
+                            className="auth-border-glow"
+                            glowColor="20 85 55"
+                            backgroundColor="rgba(30, 25, 21, 0.92)"
+                            borderRadius={20}
+                            glowRadius={35}
+                            glowIntensity={1.2}
+                            coneSpread={30}
+                            edgeSensitivity={25}
+                            colors={['#e8652b', '#f5a623', '#c4481a']}
+                            fillOpacity={0.4}
+                        >
+                        <div className="auth-card-inner admin-login-inner">
+                            <div className="login-icon">🔐</div>
+                            <h1>Admin Access</h1>
+                            <p>Enter password to manage orders</p>
+                            <form onSubmit={handleLogin} className="login-form">
+                                <div className="input-group">
+                                    <input
+                                        type="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        placeholder="Enter admin password"
+                                        className="admin-input"
+                                        autoFocus
+                                    />
+                                </div>
+                                {loginError && (
+                                    <motion.p
+                                        className="login-error"
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                    >
+                                        {loginError}
+                                    </motion.p>
+                                )}
+                                <button type="submit" className="btn btn-primary btn-lg login-btn cursor-target">
+                                    Login →
+                                </button>
+                            </form>
+                        </div>
+                        </BorderGlow>
                     </motion.div>
                 </div>
             </div>
