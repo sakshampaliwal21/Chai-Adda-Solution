@@ -24,10 +24,10 @@ export default function Navbar() {
     }, [location]);
 
     const navLinks = [
-        { path: '/', label: 'Home', icon: '🏠' },
-        { path: '/menu', label: 'Menu', icon: '📜' },
-        { path: '/cart', label: 'Cart', icon: '🛒' },
-        { path: '/party-order', label: 'Party Order', icon: '🎉' },
+        { path: '/', label: 'Home', icon: '' },
+        { path: '/menu', label: 'Menu', icon: '' },
+        { path: '/cart', label: 'Cart', icon: '' },
+        { path: '/party-order', label: 'Party Order', icon: '' },
         { path: '/admin', label: 'Admin', icon: '' },
     ];
 
