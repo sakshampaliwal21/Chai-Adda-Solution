@@ -1,4 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
+
+/* shadcn theme variables mapped to Chai Adda brand */
+@theme inline {
+  --color-background: #0D0B0A;
+  --color-foreground: #F5E6D3;
+  --color-primary: #E8652B;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #2D1810;
+  --color-secondary-foreground: #F5E6D3;
+  --color-accent: rgba(232, 101, 43, 0.1);
+  --color-accent-foreground: #FF8C5A;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: rgba(232, 101, 43, 0.15);
+  --color-input: rgba(232, 101, 43, 0.2);
+  --color-ring: #E8652B;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
 
 /* ===== CSS Custom Properties ===== */
 :root {
@@ -41,8 +61,10 @@
   --glass-blur: blur(20px);
 
   /* Typography */
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Cormorant', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-display: 'Cormorant', serif;
+  --font-accent: 'Cormorant', serif;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -147,6 +169,7 @@ h5,
 h6 {
   font-family: var(--font-heading);
   line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 /* ===== Scrollbar ===== */

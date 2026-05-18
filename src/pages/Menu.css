@@ -14,7 +14,7 @@
 }
 
 .menu-header h1 {
-    font-size: 2.2rem;
+    font-size: 2.9rem;
     font-weight: 800;
 }
 
@@ -127,18 +127,8 @@
 
 /* Menu Card */
 .menu-card {
-    background: var(--clr-bg-card);
-    border: 1px solid var(--clr-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: all var(--transition-base);
+    /* Base styling handled by card-spotlight in spotlight-card.css */
     cursor: default;
-}
-
-.menu-card:hover {
-    border-color: rgba(232, 101, 43, 0.25);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), var(--shadow-glow);
-    background: var(--clr-bg-card-hover);
 }
 
 /* Menu Card Image */
@@ -184,10 +174,11 @@
 }
 
 .card-name {
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 0.2rem;
     line-height: 1.3;
+    text-align: center;
 }
 
 .card-size {
@@ -195,6 +186,7 @@
     color: var(--clr-text-muted);
     display: block;
     margin-bottom: 0.75rem;
+    text-align: center;
 }
 
 .card-bottom {
@@ -202,6 +194,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 0.5rem;
+    /* text-align: center; */
 }
 
 .card-price {
@@ -230,14 +223,42 @@
     box-shadow: 0 4px 12px rgba(232, 101, 43, 0.4);
 }
 
-.add-btn.added {
-    background: rgba(52, 211, 153, 0.15);
-    border-color: rgba(52, 211, 153, 0.3);
-    color: var(--clr-success);
+.qty-controls {
+    display: flex;
+    align-items: center;
+    background: rgba(232, 101, 43, 0.12);
+    border: 1px solid rgba(232, 101, 43, 0.3);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    height: 32px;
 }
 
-.add-btn-qty {
+.qty-btn {
+    background: transparent;
+    border: none;
+    color: var(--clr-primary-light);
+    width: 28px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all var(--transition-base);
+}
+
+.qty-btn:hover {
+    background: var(--clr-primary);
+    color: white;
+}
+
+.qty-display {
+    color: var(--clr-primary-light);
     font-weight: 700;
+    font-size: 0.9rem;
+    min-width: 20px;
+    text-align: center;
 }
 
 /* Out of Stock */

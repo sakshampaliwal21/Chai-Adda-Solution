@@ -11,7 +11,7 @@ import './Menu.css';
 export default function Menu() {
     const [activeCategory, setActiveCategory] = useState(categories[0]);
     const [searchQuery, setSearchQuery] = useState('');
-    const { addItem, items: cartItems } = useCart();
+    const { addItem, updateQuantity, items: cartItems } = useCart();
     const { addToast } = useToast();
     const { isInStock, getStock } = useStock();
     const { isAuthenticated, user, toggleFavoriteItem } = useAuth();
@@ -161,19 +161,30 @@ export default function Menu() {
                                                     )}
                                                     <div className="card-bottom">
                                                         <span className="card-price">₹{item.price}</span>
-                                                        <button
-                                                            className={`add-btn ${qty > 0 ? 'added' : ''} ${outOfStock ? 'disabled' : ''}`}
-                                                            onClick={() => handleAddToCart(item)}
-                                                            disabled={outOfStock}
-                                                        >
-                                                            {outOfStock ? (
+                                                        {outOfStock ? (
+                                                            <button className="add-btn disabled" disabled>
                                                                 <span>Unavailable</span>
-                                                            ) : qty > 0 ? (
-                                                                <span className="add-btn-qty">{qty} ✓</span>
-                                                            ) : (
+                                                            </button>
+                                                        ) : qty > 0 ? (
+                                                            <div className="qty-controls">
+                                                                <button 
+                                                                    className="qty-btn minus"
+                                                                    onClick={(e) => { e.stopPropagation(); updateQuantity(item.id, qty - 1); }}
+                                                                >-</button>
+                                                                <span className="qty-display">{qty}</span>
+                                                                <button 
+                                                                    className="qty-btn plus"
+                                                                    onClick={(e) => { e.stopPropagation(); updateQuantity(item.id, qty + 1); }}
+                                                                >+</button>
+                                                            </div>
+                                                        ) : (
+                                                            <button
+                                                                className="add-btn"
+                                                                onClick={(e) => { e.stopPropagation(); handleAddToCart(item); }}
+                                                            >
                                                                 <span>Add +</span>
-                                                            )}
-                                                        </button>
+                                                            </button>
+                                                        )}
                                                     </div>
                                                 </div>
                                                 </SpotlightCard>

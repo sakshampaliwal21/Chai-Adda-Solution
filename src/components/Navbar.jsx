@@ -39,7 +39,7 @@ export default function Navbar() {
     return (
         <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
             <div className="navbar-inner container">
-                <Link to="/" className="navbar-logo cursor-target">
+                <Link to="/" className="navbar-logo cursor-target" onClick={() => setMobileOpen(false)} style={{ zIndex: 50 }}>
                     <span className="logo-icon">☕</span>
                     <span className="logo-text">
                         <span className="logo-chai">चाय</span> ADDA
@@ -47,52 +47,58 @@ export default function Navbar() {
                 </Link>
 
                 <div className={`navbar-links ${mobileOpen ? 'open' : ''}`}>
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.path}
-                            to={link.path}
-                            className={`nav-link cursor-target ${location.pathname === link.path ? 'active' : ''}`}
-                        >
-                            <span className="nav-icon">{link.icon}</span>
-                            <span>{link.label}</span>
-                            {link.path === '/cart' && totalItems > 0 && (
-                                <motion.span
-                                    className="badge cart-badge"
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    key={totalItems}
-                                    transition={{ type: 'spring', stiffness: 500, damping: 20 }}
-                                >
-                                    {totalItems}
-                                </motion.span>
-                            )}
-                        </Link>
-                    ))}
+                    <div className="nav-links-center">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                className={`nav-link cursor-target ${location.pathname === link.path ? 'active' : ''}`}
+                                onClick={() => setMobileOpen(false)}
+                            >
+                                <span className="nav-icon">{link.icon}</span>
+                                <span>{link.label}</span>
+                                {link.path === '/cart' && totalItems > 0 && (
+                                    <motion.span
+                                        className="badge cart-badge"
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        key={totalItems}
+                                        transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+                                    >
+                                        {totalItems}
+                                    </motion.span>
+                                )}
+                            </Link>
+                        ))}
+                    </div>
 
                     {/* Auth Section */}
-                    {isAuthenticated ? (
-                        <div className="nav-user-section">
-                            <Link to="/profile" className="nav-user-info cursor-target" style={{ textDecoration: 'none' }}>
-                                <span className="nav-user-avatar">{user.avatar}</span>
-                                <span className="nav-user-name">{user.name?.split(' ')[0]}</span>
-                            </Link>
-                            <button
-                                className="nav-logout-btn cursor-target"
-                                onClick={handleLogout}
-                                title="Logout"
+                    <div className="nav-auth-section">
+                        {isAuthenticated ? (
+                            <div className="nav-user-section">
+                                <Link to="/profile" className="nav-user-info cursor-target" onClick={() => setMobileOpen(false)} style={{ textDecoration: 'none' }}>
+                                    <span className="nav-user-avatar">{user.avatar}</span>
+                                    <span className="nav-user-name">{user.name?.split(' ')[0]}</span>
+                                </Link>
+                                <button
+                                    className="nav-logout-btn cursor-target"
+                                    onClick={handleLogout}
+                                    title="Logout"
+                                >
+                                    ↗
+                                </button>
+                            </div>
+                        ) : (
+                            <Link
+                                to="/auth"
+                                onClick={() => setMobileOpen(false)}
+                                className={`nav-link nav-login-link cursor-target ${location.pathname === '/auth' ? 'active' : ''}`}
                             >
-                                ↗
-                            </button>
-                        </div>
-                    ) : (
-                        <Link
-                            to="/auth"
-                            className={`nav-link nav-login-link cursor-target ${location.pathname === '/auth' ? 'active' : ''}`}
-                        >
-                            <span className="nav-icon">👤</span>
-                            <span>Login</span>
-                        </Link>
-                    )}
+                                <span className="nav-icon">👤</span>
+                                <span>Login</span>
+                            </Link>
+                        )}
+                    </div>
                 </div>
 
                 <button
