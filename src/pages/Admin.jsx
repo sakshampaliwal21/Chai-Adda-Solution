@@ -9,9 +9,9 @@ import AdminDashboard from './AdminDashboard';
 import './Admin.css';
 
 const statusConfig = {
-    received: { label: 'Received', icon: '🟡', color: 'var(--clr-received)', next: 'preparing' },
-    preparing: { label: 'Preparing', icon: '🟠', color: 'var(--clr-preparing)', next: 'serving' },
-    serving: { label: 'Serving', icon: '🟢', color: 'var(--clr-serving)', next: null },
+    received: { label: 'Received', icon: '', color: 'var(--clr-received)', next: 'preparing' },
+    preparing: { label: 'Preparing', icon: '', color: 'var(--clr-preparing)', next: 'serving' },
+    serving: { label: 'Serving', icon: '', color: 'var(--clr-serving)', next: null },
 };
 
 export default function Admin() {
@@ -166,7 +166,6 @@ export default function Admin() {
                             fillOpacity={0.4}
                         >
                         <div className="auth-card-inner admin-login-inner">
-                            <div className="login-icon">🔐</div>
                             <h1>Admin Access</h1>
                             <p>Enter password to manage orders</p>
                             <form onSubmit={handleLogin} className="login-form">
@@ -233,7 +232,6 @@ export default function Admin() {
                         className={`admin-tab cursor-target ${activeTab === 'orders' ? 'active' : ''}`}
                         onClick={() => setActiveTab('orders')}
                     >
-                        <span className="admin-tab-icon">🍽️</span>
                         <span>Orders</span>
                         {orders.length > 0 && (
                             <span className="admin-tab-badge">{orders.length}</span>
@@ -243,7 +241,6 @@ export default function Admin() {
                         className={`admin-tab cursor-target ${activeTab === 'stock' ? 'active' : ''}`}
                         onClick={() => setActiveTab('stock')}
                     >
-                        <span className="admin-tab-icon">📦</span>
                         <span>Stock</span>
                         {outOfStockItems.length > 0 && (
                             <span className="admin-tab-badge danger">{outOfStockItems.length}</span>
@@ -253,7 +250,6 @@ export default function Admin() {
                         className={`admin-tab cursor-target ${activeTab === 'dashboard' ? 'active' : ''}`}
                         onClick={() => setActiveTab('dashboard')}
                     >
-                        <span className="admin-tab-icon">📊</span>
                         <span>Dashboard</span>
                     </button>
                 </motion.div>
@@ -276,35 +272,35 @@ export default function Admin() {
                                 transition={{ delay: 0.1 }}
                             >
                                 <div className="stat-card glass">
-                                    <span className="stat-icon">📦</span>
+                                    <span className="stat-icon"></span>
                                     <div className="stat-data">
                                         <span className="stat-num">{counts.total}</span>
                                         <span className="stat-lbl">Total Orders</span>
                                     </div>
                                 </div>
                                 <div className="stat-card glass" style={{ borderTopColor: 'var(--clr-received)' }}>
-                                    <span className="stat-icon">🟡</span>
+                                    <span className="stat-icon"></span>
                                     <div className="stat-data">
                                         <span className="stat-num">{counts.received}</span>
                                         <span className="stat-lbl">Received</span>
                                     </div>
                                 </div>
                                 <div className="stat-card glass" style={{ borderTopColor: 'var(--clr-preparing)' }}>
-                                    <span className="stat-icon">🟠</span>
+                                    <span className="stat-icon"></span>
                                     <div className="stat-data">
                                         <span className="stat-num">{counts.preparing}</span>
                                         <span className="stat-lbl">Preparing</span>
                                     </div>
                                 </div>
                                 <div className="stat-card glass" style={{ borderTopColor: 'var(--clr-serving)' }}>
-                                    <span className="stat-icon">🟢</span>
+                                    <span className="stat-icon"></span>
                                     <div className="stat-data">
                                         <span className="stat-num">{counts.serving}</span>
                                         <span className="stat-lbl">Serving</span>
                                     </div>
                                 </div>
                                 <div className="stat-card glass" style={{ borderTopColor: 'var(--clr-accent)' }}>
-                                    <span className="stat-icon">🎉</span>
+                                    <span className="stat-icon"></span>
                                     <div className="stat-data">
                                         <span className="stat-num">{counts.scheduled}</span>
                                         <span className="stat-lbl">Scheduled</span>
@@ -320,7 +316,7 @@ export default function Admin() {
                                         className={`filter-btn cursor-target ${filter === f ? 'active' : ''}`}
                                         onClick={() => setFilter(f)}
                                     >
-                                        {f === 'all' ? '📋 All' : f === 'scheduled' ? '🎉 Scheduled' : `${statusConfig[f].icon} ${statusConfig[f].label}`}
+                                        {f === 'all' ? 'All' : f === 'scheduled' ? 'Scheduled' : `${statusConfig[f].label}`}
                                     </button>
                                 ))}
                             </div>
@@ -329,7 +325,7 @@ export default function Admin() {
                             <div className="admin-orders">
                                 {filteredOrders.length === 0 ? (
                                     <div className="no-orders">
-                                        <span className="no-orders-icon">📭</span>
+                                        <span className="no-orders-icon"></span>
                                         <h3>No orders{filter !== 'all' ? ` with status "${filter}"` : ''}</h3>
                                         <p>Orders will appear here when customers place them</p>
                                     </div>
@@ -361,13 +357,13 @@ export default function Admin() {
                                                                 borderColor: `${config.color}40`,
                                                             }}
                                                         >
-                                                            {config.icon} {config.label}
+                                                            {config.label}
                                                         </span>
                                                     </div>
 
                                                     {order.scheduleInfo?.isPartyOrder && (
                                                         <div className="order-schedule-banner">
-                                                            <span className="order-schedule-badge">🎉 Party Order</span>
+                                                            <span className="order-schedule-badge">Party Order</span>
                                                             <span className="order-schedule-detail">📅 {order.scheduleInfo.date} · {order.scheduleInfo.timeSlot}</span>
                                                             <span className="order-schedule-detail">👤 {order.scheduleInfo.name} · {order.scheduleInfo.phone}</span>
                                                         </div>
@@ -390,14 +386,14 @@ export default function Admin() {
                                                                     className="btn btn-primary btn-sm cursor-target"
                                                                     onClick={() => handleStatusUpdate(order.id, config.next)}
                                                                 >
-                                                                    Move to {statusConfig[config.next].label} {statusConfig[config.next].icon}
+                                                                    Move to {statusConfig[config.next].label}
                                                                 </button>
                                                             ) : (
                                                                 <button
                                                                     className="btn btn-sm complete-btn cursor-target"
                                                                     onClick={() => handleComplete(order.id)}
                                                                 >
-                                                                    ✅ Complete Order
+                                                                    Complete Order
                                                                 </button>
                                                             )}
                                                         </div>

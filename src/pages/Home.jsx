@@ -342,7 +342,7 @@ export default function Home() {
                             style={{ padding: '1.5rem', borderRadius: 'var(--radius-lg)', marginBottom: '3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}
                         >
                             <div>
-                                <h3 style={{ margin: 0, color: 'var(--clr-accent)', fontSize: '1.5rem' }}>⭐ Quick Reorder</h3>
+                                <h3 style={{ margin: 0, color: 'var(--clr-accent)', fontSize: '1.5rem' }}>Quick Reorder</h3>
                                 <p style={{ margin: '0.25rem 0 0 0', fontSize: '1.1rem', color: 'var(--clr-text-secondary)' }}>Grab your usual: <strong>{favorites[0].name}</strong></p>
                             </div>
                             <button className="btn btn-primary cursor-target" onClick={() => handleQuickReorder(favorites[0].items)}>

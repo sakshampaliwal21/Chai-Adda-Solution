@@ -32,8 +32,9 @@
 }
 
 .admin-login h1 {
-    font-size: 2rem;
+    font-size: 2.8rem;
     margin-bottom: 1.25rem;
+    margin-top: 0;
 }
 
 .admin-login>p {

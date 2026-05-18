@@ -126,28 +126,28 @@ export default function StockManagement() {
                 transition={{ delay: 0.05 }}
             >
                 <div className="stock-stat-card glass">
-                    <span className="stock-stat-icon">📋</span>
+                    <span className="stock-stat-icon"></span>
                     <div className="stock-stat-data">
                         <span className="stock-stat-num">{totalItems}</span>
                         <span className="stock-stat-lbl">Total Items</span>
                     </div>
                 </div>
                 <div className="stock-stat-card glass stock-stat-good">
-                    <span className="stock-stat-icon">✅</span>
+                    <span className="stock-stat-icon"></span>
                     <div className="stock-stat-data">
                         <span className="stock-stat-num">{inStockCount}</span>
                         <span className="stock-stat-lbl">In Stock</span>
                     </div>
                 </div>
                 <div className="stock-stat-card glass stock-stat-warning">
-                    <span className="stock-stat-icon">⚠️</span>
+                    <span className="stock-stat-icon"></span>
                     <div className="stock-stat-data">
                         <span className="stock-stat-num">{lowStockItems.length}</span>
                         <span className="stock-stat-lbl">Low Stock</span>
                     </div>
                 </div>
                 <div className="stock-stat-card glass stock-stat-danger">
-                    <span className="stock-stat-icon">🚫</span>
+                    <span className="stock-stat-icon"></span>
                     <div className="stock-stat-data">
                         <span className="stock-stat-num">{outOfStockItems.length}</span>
                         <span className="stock-stat-lbl">Out of Stock</span>
@@ -175,7 +175,7 @@ export default function StockManagement() {
                     className="btn btn-ghost btn-sm stock-reset-btn"
                     onClick={() => setShowConfirmReset(true)}
                 >
-                    🔄 Reset All Stock
+                    Reset All Stock
                 </button>
             </motion.div>
 
@@ -190,7 +190,7 @@ export default function StockManagement() {
                     className={`stock-cat-btn cursor-target ${activeCategory === 'all' ? 'active' : ''}`}
                     onClick={() => setActiveCategory('all')}
                 >
-                    📋 All
+                    All
                 </button>
                 {categories.map((catKey) => (
                     <button
@@ -348,7 +348,7 @@ export default function StockManagement() {
                             exit={{ scale: 0.9, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <span className="stock-modal-icon">⚠️</span>
+                            <span className="stock-modal-icon"></span>
                             <h3>Reset All Stock?</h3>
                             <p>This will reset all items to 50 units. This action cannot be undone.</p>
                             <div className="stock-modal-actions">

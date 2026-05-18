@@ -158,7 +158,7 @@ export default function AdminDashboard() {
             >
                 <div className="kpi-card glass">
                     <div className="kpi-icon-wrap kpi-today">
-                        <span className="kpi-icon">💰</span>
+                        <span className="kpi-icon" style={{ fontSize: '0.85rem', fontWeight: 'bold', fontStyle: 'normal' }}>Day</span>
                     </div>
                     <div className="kpi-content">
                         <span className="kpi-value">
@@ -173,7 +173,7 @@ export default function AdminDashboard() {
 
                 <div className="kpi-card glass">
                     <div className="kpi-icon-wrap kpi-week">
-                        <span className="kpi-icon">📈</span>
+                        <span className="kpi-icon" style={{ fontSize: '0.85rem', fontWeight: 'bold', fontStyle: 'normal' }}>Week</span>
                     </div>
                     <div className="kpi-content">
                         <span className="kpi-value">
@@ -188,7 +188,7 @@ export default function AdminDashboard() {
 
                 <div className="kpi-card glass">
                     <div className="kpi-icon-wrap kpi-month">
-                        <span className="kpi-icon">📊</span>
+                        <span className="kpi-icon" style={{ fontSize: '0.85rem', fontWeight: 'bold', fontStyle: 'normal' }}>Month</span>
                     </div>
                     <div className="kpi-content">
                         <span className="kpi-value">
@@ -203,7 +203,7 @@ export default function AdminDashboard() {
 
                 <div className="kpi-card glass">
                     <div className="kpi-icon-wrap kpi-total">
-                        <span className="kpi-icon">🏆</span>
+                        <span className="kpi-icon" style={{ fontSize: '0.85rem', fontWeight: 'bold', fontStyle: 'normal' }}>Total</span>
                     </div>
                     <div className="kpi-content">
                         <span className="kpi-value">

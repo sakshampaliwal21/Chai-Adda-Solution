@@ -70,25 +70,25 @@ export default function Profile() {
                         className={`profile-tab cursor-target ${activeTab === 'history' ? 'active' : ''}`}
                         onClick={() => setActiveTab('history')}
                     >
-                        <span>📜 History</span>
+                        <span>History</span>
                     </button>
                     <button
                         className={`profile-tab cursor-target ${activeTab === 'favorites' ? 'active' : ''}`}
                         onClick={() => setActiveTab('favorites')}
                     >
-                        <span>⭐ Favorites</span>
+                        <span>Favorites</span>
                     </button>
                     <button
                         className={`profile-tab cursor-target ${activeTab === 'recommended' ? 'active' : ''}`}
                         onClick={() => setActiveTab('recommended')}
                     >
-                        <span>✨ Recommended</span>
+                        <span>Recommended</span>
                     </button>
                     <button
                         className={`profile-tab cursor-target ${activeTab === 'dashboard' ? 'active' : ''}`}
                         onClick={() => setActiveTab('dashboard')}
                     >
-                        <span>📊 Dashboard</span>
+                        <span>Dashboard</span>
                     </button>
                 </motion.div>
 
